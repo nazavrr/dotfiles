@@ -1,0 +1,45 @@
+# - OS-agnostic Options -
+
+# Theme Settings
+theme = Gruvbox Dark
+
+# Mouse Settings
+mouse-hide-while-typing = true
+
+# Keybindings
+keybind = clear
+keybind = ctrl+shift+KeyC=copy_to_clipboard
+keybind = ctrl+shift+KeyV=paste_from_clipboard
+keybind = ctrl+shift+plus=increase_font_size:1
+keybind = ctrl+shift+minus=decrease_font_size:1
+keybind = ctrl+equal=reset_font_size
+keybind = ctrl+shift+KeyI=inspector:toggle
+keybind = ctrl+shift+KeyQ=close_surface
+keybind = ctrl+shift+KeyR=reload_config
+
+# Window Settings
+title = Ghostty
+window-padding-x = 0
+window-padding-y = 0
+gtk-single-instance = true
+gtk-titlebar = false
+
+# Other Settings
+confirm-close-surface = false
+shell-integration-features = cursor,sudo,no-title
+
+# - OS-specific Options -
+
+{{- if eq .chezmoi.os "darwin" }}
+# Font Settings
+font-family = Iosevka Nerd Font Mono
+font-size = 16
+{{- else }}
+
+# Font Settings
+font-family = monospace
+font-size = 13
+
+# Linux Window Settings
+window-decoration = server
+{{- end }}
