@@ -19,8 +19,6 @@ keybind = ctrl+shift+KeyR=reload_config
 
 # Window Settings
 title = Ghostty
-window-padding-x = 0
-window-padding-y = 0
 gtk-single-instance = true
 gtk-titlebar = false
 
@@ -31,9 +29,13 @@ shell-integration-features = cursor,sudo,no-title
 # - OS-specific Options -
 
 {{- if eq .chezmoi.os "darwin" }}
+
 # Font Settings
 font-family = Iosevka Nerd Font Mono
 font-size = 16
+
+# MacOS Keybindings
+keybind = super+KeyQ=quit
 {{- else }}
 
 # Font Settings
@@ -42,4 +44,6 @@ font-size = 13
 
 # Linux Window Settings
 window-decoration = server
+window-padding-x = 0
+window-padding-y = 0
 {{- end }}
