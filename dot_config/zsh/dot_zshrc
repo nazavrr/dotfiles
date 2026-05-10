@@ -1,0 +1,71 @@
+# Options
+setopt nobeep
+setopt autocd
+setopt correct
+setopt interactive_comments
+zle_highlight=('paste:none')
+
+# History
+HISTFILE=$XDG_CACHE_HOME/zsh/.histfile
+HISTSIZE=10000
+SAVEHIST=10000
+setopt share_history
+
+# Completions
+autoload -Uz compinit promptinit bashcompinit
+zstyle ':completion:*' menu select
+zmodload zsh/complist
+compinit -d "$XDG_CACHE_HOME/zsh/.zcompdump"
+bashcompinit
+promptinit
+_comp_options+=(globdots)
+if $DOTF_IS_LINUX; then
+    complete -C '/usr/bin/aws_completer' aws
+    eval "$(uv generate-shell-completion zsh)"
+    eval "$(uvx --generate-shell-completion zsh)"
+elif $DOTF_IS_MACOS; then
+    complete -C '/usr/local/bin/aws_completer' aws
+fi
+
+# Colors
+autoload -Uz colors && colors
+
+# Vi Mode
+bindkey -v
+export KEYTIMEOUT=1
+## Change cursor shape for different vi modes.
+function zle-keymap-select () {
+    case $KEYMAP in
+        vicmd) echo -ne '\e[1 q';;      # block
+        viins|main) echo -ne '\e[5 q';; # beam
+    esac
+}
+zle -N zle-keymap-select
+zle-line-init() {
+    zle -K viins # initiate `vi insert` as keymap (can be removed if `bindkey -V` has been set elsewhere)
+    echo -ne "\e[5 q"
+}
+zle -N zle-line-init
+echo -ne '\e[5 q' # Use beam shape cursor on startup.
+preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
+
+# Aliases
+[ -f $ZDOTDIR/.aliasrc ] && source $ZDOTDIR/.aliasrc
+
+# Plugins
+if $DOTF_IS_LINUX; then
+    ZSH_PLUGINS_DIR=/usr/share/zsh/plugins
+elif $DOTF_IS_MACOS; then
+    ZSH_PLUGINS_DIR=$HOMEBREW_PREFIX/share
+fi
+
+source $ZSH_PLUGINS_DIR/zsh-autosuggestions/zsh-autosuggestions.zsh
+source $ZSH_PLUGINS_DIR/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+## Zsh-history-substring-search
+source $ZSH_PLUGINS_DIR/zsh-history-substring-search/zsh-history-substring-search.zsh
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+
+eval "$(starship init zsh)"

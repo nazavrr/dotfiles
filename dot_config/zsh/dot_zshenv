@@ -1,0 +1,38 @@
+# OS detection to use across zsh dotfiles
+export DOTF_IS_LINUX=false
+export DOTF_IS_MACOS=false
+
+case "$OSTYPE" in
+    linux*)
+        DOTF_IS_LINUX=true
+        ;;
+    darwin*)
+        DOTF_IS_MACOS=true
+        ;;
+esac
+
+# Default editor
+export EDITOR=nvim
+export VISUAL=nvim
+
+# Append to $PATH only if not in tmux
+# to avoid duplicated entries
+if [[ -z $TMUX ]]; then
+    export PATH=$PATH:$HOME/.local/bin
+fi
+
+# XDG
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/.share
+export XDG_STATE_HOME=$HOME/.local/state
+
+if $DOTF_IS_LINUX; then
+    # AWS
+    export AWS_CONFIG_FILE=$XDG_CONFIG_HOME/aws/config
+    export AWS_SHARED_CREDENTIALS_FILE=$XDG_DATA_HOME/aws/credentials
+    export SAM_CLI_TELEMETRY=0
+
+    # QT
+    export QT_QPA_PLATFORMTHEME=qt6ct
+fi

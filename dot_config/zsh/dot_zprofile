@@ -1,0 +1,7 @@
+if $DOTF_IS_LINUX; then
+    if [ -z "${DISPLAY}" ] && [ "${XDG_VTNR}" -eq 1 ]; then
+      exec startx
+    fi
+elif $DOTF_IS_MACOS; then
+    eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi

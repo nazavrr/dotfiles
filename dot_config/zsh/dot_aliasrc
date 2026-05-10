@@ -1,0 +1,31 @@
+#!/usr/bin/env sh
+
+# Colorize outpurs
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+
+# Copying/Pasting Text
+if $DOTF_IS_LINUX; then
+    alias c='xclip'
+    alias v='xclip -o'
+    alias cs='xclip -selection clipboard'
+    alias vs='xclip -o -selection clipboard'
+elif $DOTF_IS_MACOS; then
+    alias c='pbcopy'
+    alias v='pbpaste'
+    alias cs='pbcopy'
+    alias vs='pbpaste'
+fi
+
+if command -v unrar-free >/dev/null 2>&1; then
+    alias unrar='unrar-free'
+fi
+
+if command -v ffmpeg >/dev/null 2>&1; then
+    alias ffmpeg='ffmpeg -hide_banner'
+fi
+if command -v ffprobe >/dev/null 2>&1; then
+    alias ffprobe='ffprobe -hide_banner'
+fi
