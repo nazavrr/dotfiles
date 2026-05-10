@@ -24,8 +24,15 @@ fi
 # XDG
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/.share
 export XDG_STATE_HOME=$HOME/.local/state
+if $DOTF_IS_LINUX; then
+    # Idk why I set it like that on linux years ago...
+    # now I have to keep it different between linux and macos
+    # TODO: change to standard on a new linux machine
+    export XDG_DATA_HOME=$HOME/.local/.share
+elif $DOTF_IS_MACOS; then
+    export XDG_DATA_HOME=$HOME/.local/share
+fi
 
 if $DOTF_IS_LINUX; then
     # AWS
