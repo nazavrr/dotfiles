@@ -5,10 +5,16 @@ My personal dotfiles managed with [chezmoi](https://github.com/twpayne/chezmoi)
     ```sh
     chezmoi init git@github.com:nazavrr/dotfiles.git
     ```
-- On the already configured machine, pull and apply the latest changes with:
-    ```sh
-    chezmoi update -v
-    ```
+- On the already configured machine:
+    - Pull the latest changes with:
+        ```sh
+        chzpull
+        ```
+        `chzpull` is an alias for `chezmoi git pull -- --autostash --rebase`
+    - Pull and apply the latest changes with:
+        ```sh
+        chezmoi update -v
+        ```
 ## Usage
 To check what files would change if you ran `chezmoi apply`:
 ```sh
