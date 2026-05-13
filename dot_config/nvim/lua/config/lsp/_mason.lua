@@ -10,6 +10,7 @@ local ensure_installed = {
     -- Language Servers
     "lua_ls",
     "basedpyright",
+    "terraformls",
 
     -- Formatters
     "ruff",

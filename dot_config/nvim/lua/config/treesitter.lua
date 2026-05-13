@@ -40,6 +40,7 @@ local ensure_installed = {
     "python",
     "yaml",
     "json",
+    "terraform",
 }
 
 treesitter.install(ensure_installed)
