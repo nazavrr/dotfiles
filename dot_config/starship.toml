@@ -76,6 +76,10 @@ format = '[$symbol($version )]($style)'
 format = '[$symbol($version )]($style)'
 symbol = ' '
 
+[terraform]
+format = '[$symbol$workspace]($style) '
+symbol = ' '
+detect_files = ['.terraform-version']
 
 # Disabled modules go here
 [line_break]
