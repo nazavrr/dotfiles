@@ -43,3 +43,8 @@ if $DOTF_IS_LINUX; then
     # QT
     export QT_QPA_PLATFORMTHEME=qt6ct
 fi
+
+# tenv
+if command -v tenv >/dev/null 2>&1; then
+    export TENV_ROOT=$XDG_DATA_HOME/tenv
+fi
