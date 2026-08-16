@@ -42,6 +42,9 @@ if $DOTF_IS_LINUX; then
 
     # QT
     export QT_QPA_PLATFORMTHEME=qt6ct
+
+    # This fixes cursor size in Brave
+    export XCURSOR_SIZE=32
 fi
 
 # tenv
